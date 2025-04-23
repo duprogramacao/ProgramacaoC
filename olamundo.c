@@ -12,7 +12,7 @@ int main () {
 
     char codigo[3];
     printf("Digite o código de três dígitos da carta: \n");
-    scanf("%s", &codigo);
+    scanf("%s", codigo);
 
     char nomecidade[25];
     printf("Digite o nome da cidade: \n");
@@ -87,6 +87,21 @@ int main () {
     printf("Nome da Cidade: %s\n", nomecidade);
     printf("População: %d\n", populacao);
     printf("Área: %.2f\n", area);
+    printf("PIB: %d\n", pib);
+    printf("PIB Per Capta: %.2f\n", pibpercapta);
+    printf("Pontos turísticos: \n", pontoturistico);
+    printf("Densidade populacional: %.2f\n", densidade);
+
+    //print carta II
+    printf("Carta 2: \n");
+    printf("Estado: %c\n", estado2);
+    printf("Nome da Cidade: %s\n", nomecidade2);
+    printf("População: %d\n", populacao2);
+    printf("Área: %.2f\n", area2);
+    printf("PIB: %d\n", pib2);
+    printf("PIB Per Capta: %.2f\n", pibpercapta2);
+    printf("Pontos turísticos: \n", pontoturistico2);
+    printf("Densidade populacional: %.2f\n", densidade2);
 
 
 
