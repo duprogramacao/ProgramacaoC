@@ -83,6 +83,7 @@ int main () {
 
     //print das cartas I e II
     printf("Carta 1: \n");
+    printf("Número da carta: %d", numerocarta);
     printf("Estado: %c\n", estado);
     printf("Nome da Cidade: %s\n", nomecidade);
     printf("População: %d\n", populacao);
@@ -94,13 +95,14 @@ int main () {
 
     //print carta II
     printf("Carta 2: \n");
+    printf("Número da carta: %d", numerocarta2);
     printf("Estado: %c\n", estado2);
     printf("Nome da Cidade: %s\n", nomecidade2);
     printf("População: %d\n", populacao2);
-    printf("Área: %.2f\n", area2);
+    printf("Área: %.2f km²\n", area2);
     printf("PIB: %d\n", pib2);
     printf("PIB Per Capta: %.2f\n", pibpercapta2);
-    printf("Pontos turísticos: \n", pontoturistico2);
+    printf("Pontos turísticos: %d \n", pontoturistico2);
     printf("Densidade populacional: %.2f\n", densidade2);
 
 
