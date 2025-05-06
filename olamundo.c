@@ -2,7 +2,7 @@
 int main () {
     //Desafio - Cartas Super Trunfo - Intermediário 
     //Inserção de dados para a Carta I
-    printf("--- Desafio das cartas Super Trunfo ---");
+    printf("--- Desafio das cartas Super Trunfo ---\n");
 
     int numerocarta;
     printf ("Digite o número da sua carta: \n");
@@ -117,7 +117,7 @@ int main () {
     printf("Super Poder: %.2f\n", superpoder2);
 
     //Comparação das cartas, cálculo de Super Poder e exibição dos resultados
-    printf("Selecione o atributo para realizar a comparação: \n");
+    printf("Selecione dois atributos para realizar a comparação: \n");
 
     printf("1. População\n");
     printf("2. Área\n");
@@ -185,10 +185,54 @@ int main () {
         break;
 
     default:
-        printf("Empate");
+        printf("Opção inválida. Tente novamente.\n");
         break;
     }
 
+    int opcao2;
+    printf("Selecione a segunda opção para comparar: \n");
+    printf("1. População\n");
+    printf("2. Área\n");
+    printf("3. PIB\n");
+    printf("4. Número de pontos turísticos\n");
+    printf("5. Densidade demográfica\n");
+    char* vencedor;
+    scanf("%d", &opcao2);
+    
+
+        if (opcao2 == opcao){
+            printf("Digite outra opção que não seja igual à anterior.\n");
+            scanf("%d", opcao2);
+
+        }
+
+    switch (opcao2)
+    {
+    case 1:
+        vencedor = (populacao > populacao2) ? "Carta 1 venceu!" : "Carta 2 venceu!";
+        printf("Vencedor: %s\n", vencedor);
+        break;
+    case 2: 
+        vencedor = (area > area2) ? "Carta 1 venceu!" : "Carta 2 venceu!";
+        printf("Vencedor: %s\n", vencedor);
+        break;
+    case 3:
+        vencedor = (area > area2) ? "Carta 1 venceu!" : "Carta 2 venceu!";
+        printf("Vencedor: %s\n", vencedor);
+        break;
+    case 4:
+        vencedor = (pontoturistico > pontoturistico2) ? "Carta 1 venceu!" : "Carta 2 venceu!";
+        printf("Vencedor: %s\n", vencedor);
+        break;
+    case 5:
+        vencedor = (densidade > densidade2) ? "Carta 1 venceu!" : "Carta 2 venceu!";
+        printf("Vencedor: %s\n", vencedor);
+        break;
+    
+    default:
+        ("Erro! Tente novamente. \n");
+        break;
+    }
 
 
 

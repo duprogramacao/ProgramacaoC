@@ -2,18 +2,21 @@
 
 int main(){
     
-    
-    int idade;
-    printf("Digite sua idade para saber se você pode votar\n");
-    scanf("%d", &idade);
+    int populacao, populacao2, opcao2;
+    populacao = 1000;
+    populacao2 = 2000;
+    char* vencedor;
+    scanf("%d", &opcao2);
 
-    if (idade >= 17) {
-        printf("Você pode votar");
-    } else {
-        printf("Você não pode votar");
+    switch (opcao2){
+    case 1:
+        vencedor = (populacao > populacao2) ? "Carta 1 venceu!" : "Carta 2 venceu!";
+        printf("Vencedor: %s\n", vencedor);
+        break;
+
+    default:
+
+    break; 
     }
-
-
-
     return 0;
 }
