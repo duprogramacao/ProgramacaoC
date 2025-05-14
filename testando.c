@@ -1,42 +1,38 @@
 #include <stdio.h>
 int main (){
-    //testando  assign e long, comparação, etc
-    
-    //Estoque
-    //Como estoque é apenas positivo, vou usar unsigned
+    //Tabuleiro de Batalha Naval
+    //Print do tabuleiro
 
-    char produtoA[30] = "Produto A";
-    char produtoB[30] = "Produto B";
-    
-    unsigned int estoqueA = 1000;
-    unsigned int estoqueB = 2000;
+    char letras[] = {'A', 'B', 'C', 'D', 'F', 'G', 'H', 'I', 'J'};
+    printf("   ");
+    for(int i = 0; i < 10; i++){
+        printf("%c  ", letras[i]);
+    }
+    printf("\n");
+    int tabuleiro[10][10] = { 
+        (0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+        (0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+        (0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+        (0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+        (0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+        (0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+        (0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+        (0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+        (0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+        (0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
-    float valorA = 10.50;
-    float valorB = 20.40;
-    
-    unsigned int estoqueMinimoA = 500;
-    unsigned int estoqueMinimoB = 2500;
-    
-    double valortotalA;
-    double valortotalB;
 
-    printf("Produto %s tem o estoque de %u e o valor unitário é R$ %.2f\n", produtoA, estoqueA, valorA);
-    printf("Produto %s tem o estoque de %u e o valor unitário é R$ %.2f\n", produtoB, estoqueB, valorB);
-
-    //Comparações com o valor mínimo de estoque
-    int resultadoA, resultadoB;
-    resultadoA = estoqueA > estoqueMinimoA;
-    resultadoB = estoqueB > estoqueMinimoB;
-
-    printf("O produto %s tem estoque mínimo %d\n", produtoA, resultadoA);
-    printf("O produto %s tem estoque mínimo %d\n", produtoB, resultadoB);
-
-    printf("O valor total de A (R$%.2f) é maior que o valor total de B (R$%.2f)? %d\n",
-                                     estoqueA * valorA,
-                                     estoqueB * valorB,
-                                            (estoqueA * valorA) > (estoqueB * valorB));
-
-    
+    };
+    int linha, coluna;
+        for (linha = 0; linha < 10; linha++){
+            for (coluna = 0; coluna < 10; coluna++)
+            {
+                printf("%d  ", tabuleiro[linha][coluna]);
+            }
+            printf("\n");
+            
+        
+        }
     
 
 

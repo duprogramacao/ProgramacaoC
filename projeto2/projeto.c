@@ -1,22 +1,16 @@
 #include <stdio.h>
 
-int main(){
-    
-    int populacao, populacao2, opcao2;
-    populacao = 1000;
-    populacao2 = 2000;
-    char* vencedor;
-    scanf("%d", &opcao2);
+int main (){
 
-    switch (opcao2){
-    case 1:
-        vencedor = (populacao > populacao2) ? "Carta 1 venceu!" : "Carta 2 venceu!";
-        printf("Vencedor: %s\n", vencedor);
-        break;
+    int tabuleiro [10][10];
+    char linha[][10] = ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J');
 
-    default:
-
-    break; 
+    for (int i = 0; i < 10; i++)
+    {
+        printf("%s", linha[i]);
     }
+    
+    
+
     return 0;
 }
