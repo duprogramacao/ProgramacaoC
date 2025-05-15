@@ -1,16 +1,24 @@
 #include <stdio.h>
 
-int main (){
+#define linhas 5
+#define colunas 5
 
-    int tabuleiro [10][10];
-    char linha[][10] = ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J');
+int main(){
 
-    for (int i = 0; i < 10; i++)
-    {
-        printf("%s", linha[i]);
+    int matriz [linhas][colunas];
+
+    int soma = 0;
+
+    for (int i = 0; i < linhas; i++){
+        for (int j = 0; j < colunas; j++){
+            soma++;
+            matriz[i][j] = soma;
+            printf("%d  ", matriz[i][j]);
+        }
+        printf("\n");
     }
-    
-    
+
+
 
     return 0;
 }
