@@ -17,6 +17,15 @@ void limparBufferEntrada(){
     while ((y = getchar()) != '\n' && y != EOF);
 };
 
+//Sistema de ataque do war
+void atacar(Territorio* atacante, Territorio* defensor){
+    int ataque, defesa;
+    if(ataque > defesa){
+        printf("Atacante venceu!")
+    }
+}
+
+
 
 int main(){
     Territorio* p = (Territorio*)malloc(sizeof(Territorio));
