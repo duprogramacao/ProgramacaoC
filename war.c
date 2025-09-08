@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define TAMANHO 5
 #define NOME_MAX_TAM 30
@@ -17,17 +18,33 @@ void limparBufferEntrada(){
     while ((y = getchar()) != '\n' && y != EOF);
 };
 
-//Sistema de ataque do war
-void atacar(Territorio* atacante, Territorio* defensor){
-    int ataque, defesa;
-    if(ataque > defesa){
-        printf("Atacante venceu!")
+void simularAtaque(Territorio *p, int atacante, int defendido) {
+    // Gerando números aleatórios para simular o ataque
+    int ataque = rand() % (p->tropas[atacante] + 1);  // O ataque será entre 0 e o número de tropas do território atacante
+    int defesa = rand() % (p->tropas[defendido] + 1); // A defesa será entre 0 e o número de tropas do território defendido
+    
+    printf("\nResultado do ataque:\n");
+    printf("Território atacante: %s (Tropas: %d)\n", p->nome[atacante], p->tropas[atacante]);
+    printf("Território defendido: %s (Tropas: %d)\n", p->nome[defendido], p->tropas[defendido]);
+    printf("Ataque: %d, Defesa: %d\n", ataque, defesa);
+
+    if (ataque > defesa) {
+        printf("O ataque foi bem-sucedido! %s conquista %s.\n", p->nome[atacante], p->nome[defendido]);
+        p->tropas[defendido] -= (ataque - defesa); // As tropas do território defendido diminuem
+        if (p->tropas[defendido] < 0) {
+            p->tropas[defendido] = 0; // Garantir que não haja tropas negativas
+        }
+    } else {
+        printf("O ataque falhou. %s consegue se defender contra o ataque de %s.\n", p->nome[defendido], p->nome[atacante]);
+        p->tropas[atacante] -= (defesa - ataque); // As tropas do território atacante diminuem
+        if (p->tropas[atacante] < 0) {
+            p->tropas[atacante] = 0; // Garantir que não haja tropas negativas
+        }
     }
 }
 
-
-
 int main(){
+
     Territorio* p = (Territorio*)malloc(sizeof(Territorio));
     if (p == NULL) {
         printf("Falha ao alocar a memória.\n");
@@ -61,7 +78,7 @@ int main(){
     scanf("%s", p->cor[i]);
 
     printf("Insira o número de tropas do território %d: ", i + 1);
-    scanf("%d", p->tropas);
+    scanf("%d", &p->tropas[i]);
     }
 
     printf("\nTerritórios cadastrados:\n");
@@ -69,8 +86,55 @@ int main(){
         printf("Território %d - Nome: %s, Cor: %s\n", i + 1, p->nome[i], p->cor[i]);
     }
     
+    
+    //seleção do território
 
+    int atacante, defendido;
 
+    while (1) {
+        printf("\n--- FASE DE ATAQUE ---\n");
+        printf("Escolha o território atacante (1 a 5, ou 0 para sair): ");
+        scanf("%d", &atacante);
 
+        if (atacante == 0) {
+            break; // sai do loop se o usuário escolher 0
+        }
 
+        if (atacante < 1 || atacante > TAMANHO) {
+            printf("Escolha inválida! Digite um valor entre 1 e 5.\n");
+            continue;
+        }
+
+        printf("Escolha o território defendido (1 a 5): ");
+        scanf("%d", &defendido);
+
+        if (defendido < 1 || defendido > TAMANHO) {
+            printf("Escolha inválida! Digite um valor entre 1 e 5.\n");
+            continue;
+        }
+
+        if (atacante == defendido) {
+            printf("O território atacante e o defendido não podem ser o mesmo.\n");
+            continue;
+        }
+
+        // Ajusta os índices pra começar de 0
+        simularAtaque(p, atacante - 1, defendido - 1);
+
+        // Mostra os territórios após o ataque
+        printf("\nTerritórios após o ataque:\n");
+        for (int i = 0; i < TAMANHO; i++) {
+            printf("Território %d - Nome: %s, Cor: %s, Tropas: %d\n", i + 1, p->nome[i], p->cor[i], p->tropas[i]);
+        }
+    }
+
+    // Liberando a memória alocada
+    for (int i = 0; i < TAMANHO; i++) {
+        free(p->nome[i]);
+        free(p->cor[i]);
+    }
+    free(p->nome);
+    free(p->cor);
+    free(p->tropas);
+    free(p);
 }
