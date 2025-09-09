@@ -43,7 +43,7 @@ void simularAtaque(Territorio *p, int atacante, int defendido) {
     }
 }
 
-void atribuirMissao(){
+const char* atribuirMissao(){
     char *vetorMissoesEstrategicas[] = {
         "Conquiste 3 territórios seguidos",
         "Elimine todas as tropas da cor vermelha",
@@ -52,13 +52,67 @@ void atribuirMissao(){
         "Elimine todas as tropas da cor azul"
     };
 
-     int totalMissoes = sizeof(vetorMissoesEstrategicas) / sizeof(vetorMissoesEstrategicas[0]);
+    int totalMissoes = sizeof(vetorMissoesEstrategicas) / sizeof(vetorMissoesEstrategicas[0]);
     int indice = rand() % totalMissoes; // sorteia índice
+    return vetorMissoesEstrategicas[indice];
 
     printf("\nMissão aleatória: %s\n", vetorMissoesEstrategicas[indice]);
 }
 
+//int global para verificar se missões foram cumpridas
+int verificarMissao(char* missao, Territorio* mapa, int tamanho){
+    int contagem = 0;
 
+    if (strcmp(missao, "Conquiste todos os territórios") == 0){
+        for (int i = 0; i < tamanho; i++){
+            if (mapa->tropas[i] <= 0){
+                return 0;
+            }
+        }
+        printf("Missão cumprida!");
+        return 1;
+    }
+    
+    if (strcmp(missao, "Conquiste 3 territórios seguidos") == 0){
+        for (int i = 0; i < tamanho - 2; i++){
+            if (mapa->tropas[i] > 0 && mapa->tropas[i+1] > 0 && mapa->tropas[i+2] > 0){
+                contagem++;
+                break;
+            }
+        }
+     return contagem > 0 ? 1 : 0;
+    }
+
+    if (strcmp(missao, "Elimine todas as tropas da cor vermelha") == 0){
+        for (int i = 0; i < tamanho; i++){
+            if(strcmp(mapa->cor[i], "Vermelha") == 0 && mapa->tropas[i] > 0){
+                return 0;
+            }
+        }
+        return 1;
+    }
+
+    if (strcmp(missao, "Elimine todas as tropas da cor verde") == 0){
+        for (int i = 0; i < tamanho; i++){
+            if(strcmp(mapa->cor[i], "Verde") == 0 && mapa->tropas[i] > 0){
+                return 0;
+            }
+        }
+        return 1;
+    }
+
+    if (strcmp(missao, "Elimine todas as tropas da cor azul") == 0){
+        for (int i = 0; i < tamanho; i++){
+            if(strcmp(mapa->cor[i], "Azul") == 0 && mapa->tropas[i] > 0){
+                return 0;
+            }
+        }
+        return 1;
+    }
+
+
+
+}
 
 
 
@@ -113,7 +167,12 @@ int main(){
     int atacante, defendido;
     int menu;
  
-    atribuirMissao;
+
+    //missão aparece na tela depois de cadastrar dados
+    char missaoAtual[100];  
+    strcpy(missaoAtual, atribuirMissao());  
+    printf("Sua missão atual: %s\n", missaoAtual);  
+
 
     printf("--- MENU DE AÇÕES ---\n");
     printf("1 - Atacar\n");
@@ -129,6 +188,7 @@ int main(){
         printf("\n--- FASE DE ATAQUE ---\n");
         printf("Escolha o território atacante (1 a 5, ou 0 para sair): ");
         scanf("%d", &atacante);
+        verificarMissao;
 
          if (atacante == 0) {
             printf("Saindo...\n");
@@ -165,11 +225,21 @@ int main(){
     
     }
     case 2:
-    printf("Sua missão:");
+      if (verificarMissao(missaoAtual, p, TAMANHO)) {
+            printf("Você cumpriu a missão!\n");
+            } else {
+            printf("Você não cumpriu a missão ainda.\n");
+            }
+            break;
 
     case 0:
     break;
+    
+    default:
+    printf("Escolha inválida.\n");
+    limparBufferEntrada();
 
+    
     // Liberando a memória alocada
     for (int i = 0; i < TAMANHO; i++) {
         free(p->nome[i]);
