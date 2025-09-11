@@ -1,79 +1,82 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <time.h>
 
-#define TAMANHO 5
-#define NOME_MAX_TAM 30
-#define COR_MAX_TAM 10
-#define NUM_MISSOES 5
+int main(){
+//Lista linear dinâmica
+int* numeros = (int*) malloc(3* sizeof(int));
+// ^ Essa função aloca espaço na memória para guardar 3 números do tipo int
 
-typedef struct {
-    char **nome;
-    char **cor;
-    int *tropas;
-} Territorio;
+//passo 2: preencher a lista
+numeros[0] = 10;
+numeros[1] = 20;
+numeros[2] = 30;
 
-// Função que sorteia e copia a missão para uma string destino
-void atribuirMissao(char *destino, char *missoes[], int totalMissoes) {
-    int indiceAleatorio = rand() % totalMissoes;
-    strcpy(destino, missoes[indiceAleatorio]);
+//passo 3: realocando a memória para expandir a lista
+numeros = (int*) realloc(numeros, 5 * sizeof(int));
+//''Ei, sistema, lembra daquele bloco de memória para 3 inteiros?
+//Preciso que ele agora tenha o espaço para 5 inteiros."
+
+numeros[3] = 40;
+numeros[4] = 50;
 }
 
-// Função que verifica se a missão foi cumprida (lógica simples inicial)
-int verificarMissao(char *missao, Territorio *mapa, int tamanho) {
-    if (strcmp(missao, "Conquistar 3 territorios seguidos") == 0) {
-        int seguidos = 0;
-        for (int i = 0; i < tamanho; i++) {
-            if (mapa->tropas[i] > 0) seguidos++;
-            if (seguidos >= 3) return 1; // vitória
-        }
-    } 
-    // Por enquanto, apenas uma lógica simples para a primeira missão
-    // Outras missões podem ser implementadas com mais condições
-    return 0;
-}
+// lista circular duplamente encadeada
+//nó
+struct No{
+    int dado; //onde é guardada a informação
+    struct No* proximo; //a ''seta'' que aponta para o próximo nó
+    struct No* anterior; //conecta a lista tanto para frente quanto para trás;
+};
 
 int main() {
-    srand(time(NULL));
+    struct No* primeiro = (struct No*) malloc(sizeof(struct No));
+    struct No* segundo = (struct No*) malloc(sizeof(struct No));
+    struct No* terceiro = (struct No*) malloc(sizeof(struct No));
 
-    // Vetor fixo de missões
-    char *missoes[NUM_MISSOES] = {
-        "Conquistar 3 territorios seguidos",
-        "Eliminar todas as tropas da cor vermelha",
-        "Eliminar todas as tropas da cor verde",
-        "Conquistar todos os territorios",
-        "Eliminar todas as tropas da cor azul"
-    };
+    primeiro->dado = 10;
+    primeiro->proximo = segundo;
 
-    // Aloca memória para a missão do jogador
-    char *missaoJogador = (char *)malloc(100 * sizeof(char));
-    if (missaoJogador == NULL) {
-        printf("Erro ao alocar memoria para missao.\n");
-        return 1;
+    segundo->dado = 20;
+    segundo->proximo = terceiro;
+
+    terceiro->dado = 30;
+    terceiro->proximo = NULL;
+
+    // Percorrendo a lista
+    struct No* atual = primeiro;
+    while (atual != NULL) {
+        printf("%d\n", atual->dado);
+        atual = atual->proximo;
     }
-
-    // Atribui uma missão aleatória ao jogador
-    atribuirMissao(missaoJogador, missoes, NUM_MISSOES);
-    printf("Missao do jogador: %s\n", missaoJogador);
-
-    // Exemplo de mapa só para teste (5 territórios com tropas aleatórias)
-    Territorio mapa;
-    mapa.tropas = (int *)malloc(TAMANHO * sizeof(int));
-    for (int i = 0; i < TAMANHO; i++) {
-        mapa.tropas[i] = rand() % 5; // tropas aleatórias
-    }
-
-    // Verificação simples (pode ser chamada no fim de cada turno)
-    if (verificarMissao(missaoJogador, &mapa, TAMANHO)) {
-        printf("Missao cumprida! Jogador venceu!\n");
-    } else {
-        printf("Missao ainda nao cumprida.\n");
-    }
-
-    // Libera memória
-    free(mapa.tropas);
-    free(missaoJogador);
 
     return 0;
+} 
+
+//função
+//remove o primeiro nó da lista
+void removerDoInicio(struct No** inicio){
+    //primeiro checa se a lista não está vazia
+    if (inicio == NULL || *inicio == NULL){
+        printf("A lista já está vazia");
+        return;
+    }
+
+    //guarda o endereço do nó que vamos promover
+    struct No* noParaRemover = *inicio;
+
+    //o inicio da lista passa a ser o segundo nó
+    *inicio = (*inicio)->proximo;
+
+    //libera a memória do nó que foi guardado
+    free(noParaRemover);
 }
+
+void listar(struct No* inicio) {
+    struct No* atual = inicio;
+    while (atual != NULL) {
+        printf("%d\n", atual->dado);
+        atual = atual->proximo;
+    }
+} 
+
+//busca linear
