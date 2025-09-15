@@ -101,7 +101,7 @@ int buscarSequencialVetor(const Item lista[], int quantidade, const char* nome) 
 int buscarBinariaVetor(const Item lista[], int quantidade, const char* nome) {
     int esquerda = 0;
     int direita = quantidade - 1;
-    comparacoesBin = 0;  // Resetar o contador de comparações para cada busca
+    int comparacoesBin = 0;  // Resetar o contador de comparações para cada busca
 
     while (esquerda <= direita) {
         comparacoesBin++;
