@@ -3,6 +3,10 @@
 #include <string.h>
 #include <time.h>
 
+
+//Void para gerar os diferentes tipos de listas
+
+
 // Definições de tamanho máximo
 #define MAX_STR_LEN 50
 #define TAM_MAX 10
@@ -292,10 +296,11 @@ int main() {
             case 2:  // Mochila com Lista Encadeada
                 do {
                     printf("\n--- Mochila com Lista Encadeada ---\n");
-                    printf("1. Adicionar item\n");
-                    printf("2. Remover item\n");
-                    printf("3. Listar itens\n");
-                    printf("4. Buscar item (Sequencial)\n");
+                    printf("1. Adicionar componente\n");
+                    printf("2. Descartar componente\n");
+                    printf("3. Listar componentes\n");
+                    printf("4. Organizar mochila (ordenar componentes)\n");
+                    printf("5. Busca binária por componente-chave (nome)\n");
                     printf("0. Voltar\n");
                     printf("Escolha uma opção: ");
                     scanf("%d", &opcao);
@@ -306,11 +311,12 @@ int main() {
 
                     switch(opcao) {
                         case 1:
-                            printf("Digite o nome do item: ");
+                            printf("---Coletando novo componente---");
+                            printf("Nome: ");
                             fgets(item.nome, MAX_STR_LEN, stdin);
                             item.nome[strcspn(item.nome, "\n")] = '\0';  // Remover o '\n'
 
-                            printf("Digite o tipo do item: ");
+                            printf("Tipo (Estrutural, Eletronico, Energia): ");
                             fgets(item.tipo, MAX_STR_LEN, stdin);
                             item.tipo[strcspn(item.tipo, "\n")] = '\0';  // Remover o '\n'
 
@@ -335,14 +341,20 @@ int main() {
                             break;
 
                         case 4:
-                            printf("Digite o nome do item a buscar: ");
-                            char nomeBuscar[MAX_STR_LEN];
-                            fgets(nomeBuscar, MAX_STR_LEN, stdin);
-                            nomeBuscar[strcspn(nomeBuscar, "\n")] = '\0';  // Remover o '\n'
-
-                            buscarSequencialListaEncadeada(mochilaLista, nomeBuscar);
-                            break;
-
+                            printf("Como deseja organizar os componentes?\n");
+                            printf("1. Por nome\n");
+                            printf("2. Por tipo");
+                            printf("3. por prioridade de montagem.\n");
+                            printf("0. Cancelar\n");
+                            switch ()
+                            {
+                            case 1:
+                                
+                                break;
+                            
+                            default:
+                                break;
+                            }
                         case 0:
                             break;
 
